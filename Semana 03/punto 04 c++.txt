@@ -1,0 +1,45 @@
+
+#include <iostream>
+#include <fstream>
+#include <math.h>
+
+double
+funcion (double x)
+{
+  return std::exp (-1 * x * x);
+}
+
+double
+calcular_derivada (double x)
+{
+  float d;
+  double h;
+  h = 0.01;
+
+  d = (funcion (x + h) - funcion (x)) / h;
+
+  return d;
+}
+
+int main ()
+{
+
+  std::ofstream * File;		// Definimos apuntador
+
+  File = new std::ofstream[2];	// Reservamos memoria
+
+  File[0].open ("MisDatos.dat", std::ofstream::trunc);	// Abrir y dejar listo para escribir
+
+  std::cout << File << std::endl;
+
+  for (int i = -20; i < 21; i++)
+    {
+      File[0] << i << " " << funcion (i) << std::endl;
+      //std::cout << i << std::endl; 
+    }
+
+
+  File[0].close ();
+
+  return 0;
+}
